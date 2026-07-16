@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <title>Spotify Clone</title>
+</head>
+<body>
+  <div class="container">
+    
+    <!-- 1. The Left Sidebar -->
+    <div class="sidebar">
+       <ul class="nav-links">
+         <li>Home</li>
+         <li>Search</li>
+         <li>Your Library</li>
+       </ul>
+    </div>
+
+    <!-- 2. The Main Area (where songs/playlists will show up) -->
+    <div class="main-content">
+       <div class="header">
+          <p>Spotify Clone UI</p>
+       </div>
+    </div>
+
+    <!-- 3. The Bottom Music Player -->
+    <div class="player">
+       <div class="player-details">
+         <img src="current-song-img.png" alt="" id="cover">
+         <div>
+           <h4 id="title">Starboy</h4>
+           <p id="artist">The Weeknd</p>
+         </div>
+       </div>
+
+       <div class="player-controls">
+         <button id="prev">Prev</button>
+         <button id="play">Play</button>
+         <button id="next">Next</button>
+         <input type="range" id="progress" value="0">
+       </div>
+    </div>
+
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>

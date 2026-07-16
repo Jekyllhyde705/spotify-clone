@@ -1,0 +1,162 @@
+/* ==========================================
+   1. RESET & BASE STYLES
+   ========================================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  background-color: #121212;
+  color: #ffffff;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* ==========================================
+   2. MAIN LAYOUT CONTAINER
+   ========================================== */
+.container {
+  display: flex;
+  height: calc(100vh - 90px); /* Leaves exact space for the bottom player */
+  width: 100%;
+}
+
+/* ==========================================
+   3. LEFT SIDEBAR
+   ========================================== */
+.sidebar {
+  width: 230px;
+  background-color: #000000;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+}
+
+.nav-links {
+  list-style-type: none;
+}
+
+.nav-links li {
+  margin-bottom: 20px;
+  color: #b3b3b3;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 14px;
+  transition: color 0.2s ease;
+}
+
+.nav-links li:hover {
+  color: #ffffff;
+}
+
+/* ==========================================
+   4. MAIN CONTENT AREA
+   ========================================== */
+.main-content {
+  flex: 1;
+  background-color: #121212;
+  padding: 24px;
+  overflow-y: auto;
+}
+
+.header {
+  margin-bottom: 24px;
+}
+
+.header p {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+/* ==========================================
+   5. BOTTOM MUSIC PLAYER BAR
+   ========================================== */
+.player {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 90px;
+  background-color: #181818;
+  border-top: 1px solid #282828;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  z-index: 100;
+}
+
+/* Left side of player: Album art and song info */
+.player-details {
+  display: flex;
+  align-items: center;
+  width: 30%;
+}
+
+.player-details img {
+  width: 56px;
+  height: 56px;
+  border-radius: 4px;
+  margin-right: 14px;
+  background-color: #282828; /* Placeholder background until image loads */
+  object-fit: cover;
+}
+
+.player-details h4 {
+  font-size: 14px;
+  font-weight: normal;
+  color: #ffffff;
+  margin-bottom: 4px;
+}
+
+.player-details p {
+  font-size: 11px;
+  color: #b3b3b3;
+}
+
+/* Center of player: Playback controls and progress bar */
+.player-controls {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 40%;
+}
+
+.player-controls button {
+  background: none;
+  border: none;
+  color: #b3b3b3;
+  font-size: 14px;
+  font-weight: bold;
+  margin: 0 12px 8px 12px;
+  cursor: pointer;
+  transition: color 0.2s ease, transform 0.1s ease;
+}
+
+.player-controls button:hover {
+  color: #ffffff;
+  transform: scale(1.05);
+}
+
+.player-controls button#play {
+  background-color: #ffffff;
+  color: #000000;
+  padding: 8px 16px;
+  border-radius: 20px;
+}
+
+.player-controls button#play:hover {
+  background-color: #f6f6f6;
+  transform: scale(1.05);
+}
+
+.player-controls input[type="range"] {
+  width: 100%;
+  max-width: 400px;
+  height: 4px;
+  cursor: pointer;
+  accent-color: #1db954; /* Spotify Green */
+}
