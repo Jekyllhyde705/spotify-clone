@@ -11,68 +11,321 @@ body {
   font-family: 'Helvetica Neue', Arial, sans-serif;
   background-color: #121212;
   color: #ffffff;
-  height: 100vh;
-  overflow: hidden;
+  min-height: 100vh;
+  overflow-x: hidden;
 }
 
 /* ==========================================
-   2. MAIN LAYOUT CONTAINER
+   2. MAIN LAYOUT & TOP BAR
    ========================================== */
 .container {
   display: flex;
-  height: calc(100vh - 90px); /* Leaves exact space for the bottom player */
+  height: calc(100vh - 90px);
   width: 100%;
 }
 
+.top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+
+.search-container {
+  position: relative;
+  width: 100%;
+  max-width: 350px;
+}
+
+.search-container input {
+  width: 100%;
+  padding: 10px 12px 10px 40px;
+  background-color: #242424;
+  border: 1px solid transparent;
+  border-radius: 500px;
+  color: #ffffff;
+  font-size: 14px;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.search-container input:focus {
+  border-color: #ffffff;
+  background-color: #2a2a2a;
+}
+
+.search-icon {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #b3b3b3;
+  pointer-events: none;
+}
+
 /* ==========================================
-   3. LEFT SIDEBAR
+   3. SIDEBAR STYLING
    ========================================== */
 .sidebar {
-  width: 230px;
+  width: 260px;
   background-color: #000000;
-  padding: 24px;
+  padding: 24px 16px;
   display: flex;
   flex-direction: column;
+  gap: 24px;
+  flex-shrink: 0;
 }
 
-.nav-links {
-  list-style-type: none;
-}
-
-.nav-links li {
-  margin-bottom: 20px;
-  color: #b3b3b3;
-  cursor: pointer;
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 22px;
   font-weight: bold;
-  font-size: 14px;
-  transition: color 0.2s ease;
+  color: #ffffff;
+  padding-left: 8px;
 }
 
-.nav-links li:hover {
+.logo i {
+  font-size: 28px;
+  color: #1db954;
+}
+
+/* ==========================================
+   4. MAGIC NAVIGATION BAR STYLING
+   ========================================== */
+.navigation {
+  position: relative;
+  width: 100%;
+  height: 70px;
+  background: #181818;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 12px;
+  margin-top: 10px;
+}
+
+.navigation ul {
+  display: flex;
+  width: 210px; /* 3 items x 70px */
+  position: relative;
+  padding: 0;
+}
+
+.navigation ul li {
+  position: relative;
+  list-style: none;
+  width: 70px;
+  height: 70px;
+  z-index: 1;
+}
+
+.navigation ul li a {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  text-decoration: none;
+  text-align: center;
+  font-weight: 500;
+}
+
+.navigation ul li a .icon {
+  position: relative;
+  display: block;
+  line-height: 75px;
+  font-size: 1.3em;
+  text-align: center;
+  transition: 0.5s;
+  color: #b3b3b3;
+}
+
+/* Lift icon when item is active */
+.navigation ul li.active a .icon {
+  transform: translateY(-32px);
   color: #ffffff;
 }
 
+.navigation ul li a .text {
+  position: absolute;
+  color: #ffffff;
+  font-weight: 500;
+  font-size: 0.7em;
+  letter-spacing: 0.05em;
+  transition: 0.5s;
+  opacity: 0;
+  transform: translateY(20px);
+  white-space: nowrap;
+}
+
+/* Show label when active */
+.navigation ul li.active a .text {
+  opacity: 1;
+  transform: translateY(10px);
+}
+
+/* The Sliding Circular Indicator Bubble */
+.indicator {
+  position: absolute;
+  top: -50%;
+  width: 70px;
+  height: 70px;
+  background: #1db954; /* Spotify green */
+  border-radius: 50%;
+  border: 6px solid #000000; /* Cutout border matches sidebar background */
+  transition: 0.5s ease;
+}
+
+/* Curved Notch Left Side */
+.indicator::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: -22px;
+  width: 20px;
+  height: 20px;
+  background: transparent;
+  border-top-right-radius: 20px;
+  box-shadow: 1px -10px 0 0 #000000;
+}
+
+/* Curved Notch Right Side */
+.indicator::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: -22px;
+  width: 20px;
+  height: 20px;
+  background: transparent;
+  border-top-left-radius: 20px;
+  box-shadow: -1px -10px 0 0 #000000;
+}
+
+/* Sliding offsets for the 3 navigation tabs */
+.navigation ul li:nth-child(1).active ~ .indicator { transform: translateX(calc(70px * 0)); }
+.navigation ul li:nth-child(2).active ~ .indicator { transform: translateX(calc(70px * 1)); }
+.navigation ul li:nth-child(3).active ~ .indicator { transform: translateX(calc(70px * 2)); }
+
 /* ==========================================
-   4. MAIN CONTENT AREA
+   5. MAIN CONTENT AREA & AUTO-GRID CARDS
    ========================================== */
 .main-content {
   flex: 1;
-  background-color: #121212;
+  background: linear-gradient(to bottom, #1e1e1e, #121212);
   padding: 24px;
   overflow-y: auto;
 }
 
-.header {
-  margin-bottom: 24px;
+.header h2 {
+  font-size: 28px;
+  margin-bottom: 20px;
 }
 
-.header p {
-  font-size: 24px;
-  font-weight: bold;
+/* Auto-fitting Responsive Grid */
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 20px;
+}
+
+.card {
+  background-color: #181818;
+  padding: 14px;
+  border-radius: 8px;
+  width: 100%;
+  cursor: pointer;
+  position: relative;
+  transition: background-color 0.3s ease;
+}
+
+.card:hover {
+  background-color: #282828;
+}
+
+.card img {
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: 6px;
+  margin-bottom: 12px;
+  object-fit: cover;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.5);
+}
+
+.card h3 {
+  font-size: 14px;
+  margin-bottom: 6px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.card p {
+  font-size: 12px;
+  color: #b3b3b3;
+}
+
+.play-hover-btn {
+  position: absolute;
+  bottom: 70px;
+  right: 20px;
+  background-color: #1db954;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+}
+
+.play-hover-btn i {
+  color: #000000;
+  font-size: 16px;
+  margin-left: 2px;
+}
+
+.card:hover .play-hover-btn {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.card-heart-btn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: rgba(0, 0, 0, 0.6);
+  border: none;
+  color: #b3b3b3;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  opacity: 0;
+  transition: all 0.2s ease;
+}
+
+.card:hover .card-heart-btn {
+  opacity: 1;
+}
+
+.card-heart-btn:hover {
+  color: #1db954 !important;
+  transform: scale(1.1);
 }
 
 /* ==========================================
-   5. BOTTOM MUSIC PLAYER BAR
+   6. BOTTOM PLAYER BAR
    ========================================== */
 .player {
   position: fixed;
@@ -85,78 +338,187 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 16px;
+  padding: 0 24px;
   z-index: 100;
 }
 
-/* Left side of player: Album art and song info */
 .player-details {
   display: flex;
   align-items: center;
-  width: 30%;
+  width: 25%;
+  gap: 12px;
 }
 
 .player-details img {
-  width: 56px;
-  height: 56px;
+  width: 52px;
+  height: 52px;
   border-radius: 4px;
-  margin-right: 14px;
-  background-color: #282828; /* Placeholder background until image loads */
+  background-color: #282828;
   object-fit: cover;
 }
 
-.player-details h4 {
-  font-size: 14px;
-  font-weight: normal;
-  color: #ffffff;
-  margin-bottom: 4px;
+.track-info {
+  max-width: 130px;
 }
 
-.player-details p {
+.track-info h4 {
+  font-size: 13px;
+  color: #ffffff;
+  margin-bottom: 2px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.track-info p {
   font-size: 11px;
   color: #b3b3b3;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 }
 
-/* Center of player: Playback controls and progress bar */
 .player-controls {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 40%;
+  width: 50%;
+  gap: 6px;
 }
 
-.player-controls button {
+.control-buttons {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.control-icon {
   background: none;
   border: none;
   color: #b3b3b3;
-  font-size: 14px;
-  font-weight: bold;
-  margin: 0 12px 8px 12px;
+  font-size: 15px;
   cursor: pointer;
-  transition: color 0.2s ease, transform 0.1s ease;
+  transition: all 0.2s ease;
 }
 
-.player-controls button:hover {
+.control-icon:hover {
   color: #ffffff;
-  transform: scale(1.05);
 }
 
-.player-controls button#play {
+.control-icon.active {
+  color: #1db954;
+  text-shadow: 0 0 8px rgba(29, 185, 84, 0.4);
+}
+
+.control-buttons button#play {
   background-color: #ffffff;
   color: #000000;
-  padding: 8px 16px;
-  border-radius: 20px;
+  border: none;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
 }
 
-.player-controls button#play:hover {
+.control-buttons button#play:hover {
+  transform: scale(1.1);
   background-color: #f6f6f6;
-  transform: scale(1.05);
 }
 
-.player-controls input[type="range"] {
+.progress-container {
+  display: flex;
+  align-items: center;
   width: 100%;
-  max-width: 400px;
+  gap: 10px;
+  max-width: 450px;
+}
+
+.progress-container span {
+  font-size: 11px;
+  color: #a7a7a7;
+  min-width: 28px;
+}
+
+.progress-container input[type="range"] {
+  flex: 1;
   height: 4px;
   cursor: pointer;
-  accent-color: #1db954; /* Spotify Green */
+  accent-color: #1db954;
+}
+
+.player-right-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 25%;
+  justify-content: flex-end;
+  color: #b3b3b3;
+}
+
+.player-right-controls input[type="range"] {
+  width: 70px;
+  height: 4px;
+  accent-color: #ffffff;
+  cursor: pointer;
+}
+
+/* ==========================================
+   7. RESPONSIVE MEDIA QUERIES
+   ========================================== */
+
+/* Medium Screens (Tablets / Smaller Laptops) */
+@media (max-width: 900px) {
+  .sidebar {
+    width: 220px;
+    padding: 16px 12px;
+  }
+
+  .control-buttons {
+    gap: 14px;
+  }
+}
+
+/* Small Screens (Mobile Phones & Tiny Windows) */
+@media (max-width: 700px) {
+  .container {
+    flex-direction: column;
+    height: auto;
+    padding-bottom: 90px;
+  }
+
+  .sidebar {
+    width: 100%;
+    padding: 12px 16px;
+    gap: 12px;
+    align-items: center;
+  }
+
+  .cards-grid {
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 12px;
+  }
+
+  .main-content {
+    padding: 16px;
+  }
+
+  .player {
+    padding: 0 12px;
+  }
+
+  .player-details {
+    width: 40%;
+  }
+
+  .player-controls {
+    width: 60%;
+  }
+
+  .player-right-controls {
+    display: none; /* Hide volume slider on mobile */
+  }
 }
